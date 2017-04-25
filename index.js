@@ -29,7 +29,7 @@ app.post('/webhook', function (req, res) {
 
           if (requestBody.result) {
 
-            if (requestBody.result.action === 'drinkabout.test') {
+            if (requestBody.result.action === 'number.eval') {
               var userResponse = parseInt(requestBody.result.resolvedQuery);
 
               if (userResponse < 10) {
