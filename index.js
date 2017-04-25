@@ -25,28 +25,28 @@ app.post('/webhook', function (req, res) {
         var speech = 'empty speech';
 
         if (req.body) {
-            var requestBody = req.body;
+          var requestBody = req.body;
 
-            if (requestBody.result) {
-                speech = '';
+          if (requestBody.result) {
 
-                if (requestBody.result.fulfillment) {
-                    speech += requestBody.result.fulfillment.speech;
-                    speech += ' ';
-                }
+            if (requestBody.result.action === 'drinkabout.test') {
+              var userResponse = parseInt(requestBody.result.resolvedQuery);
 
-                if (requestBody.result.action) {
-                    speech += 'action: ' + requestBody.result.action;
-                }
+              if (userResponse < 10) {
+                speech = 'You want Drupal!';
+              } else {
+                speech = 'You want Wordpress';
+              }
             }
+          }
         }
 
         console.log('result: ', speech);
 
         return res.json({
-            speech: 'Testing server response',
-            displayText: speech,
-            source: 'apiai-webhook-sample'
+            speech: speech,
+            source: 'drinkabout-webhook',
+            displayText: speech
         });
     } catch (err) {
         console.error("Can't process request", err);
