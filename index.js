@@ -20,6 +20,7 @@ app.listen(app.get('port'), function() {
 app.post('/webhook', function (req, res) {
 
     try {
+        var cms; 
         var speech = '';
         var cmsContext = {};
 
@@ -41,16 +42,42 @@ app.post('/webhook', function (req, res) {
               }
 
               // Determine the size of the site, based on the number of developers working on the project.
-              const siteSize = (cmsContext.parameters.developers < 20) ? "small" : "large";
+              const site = {
+                size: cmsContext.parameters['developers'] < 20 ? "small" : "large",
+                stack: cmsContext.parameters['tech-stack'],
+                commerce: cmsContext.parameters['ecommerce'],
+                style: cmsContext.parameters['tech-site-style']
+              };
 
-              // Determine which language the user has chosen
-              const siteStack = cmsContext.parameters['tech-stack'];
+              if (site.size === 'small' && site.stack === 'php' && site.commerce === 'no' && site.style === 'brochure') {
+                cms = 'Drupal';
+              }
+
+              if (site.size === 'large' && site.stack === 'php' && site.commerce === 'no' && site.style === 'personalised') {
+                cms = 'Wordpress';
+              }
+
+              if (site.size === 'small' && site.stack === 'php' && site.commerce === 'no' && site.style === 'brochure') {
+                cms = 'Umbraco';
+              }
+
+              if (site.size === 'large' && site.stack === 'php' && site.commerce === 'no' && site.style === 'personalised') {
+                cms = 'Sitecore';
+              }
+
+              if (site.size === 'small' && site.stack === 'php' && site.commerce === 'yes' && site.style === 'brochure') {
+                cms = 'Magento';
+              }
+
+              if (site.size === 'small' && site.stack === 'php' && site.commerce === 'yes' && site.style === 'personalised') {
+                cms = 'Shopify';
+              }              
 
 
               return res.json({
-                speech: siteStack,
+                speech: cms,
                 source: 'drinkabout-evaluation',
-                displayText: siteStack
+                displayText: cms
               });             
             }
           }
