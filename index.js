@@ -32,6 +32,7 @@ app.post('/webhook', function (req, res) {
 
               var contexts = requestBody.result.contexts; 
               var cmsContext = {};
+              var parameter = cmsContext.parameters;
               
               // Locate and store the CMS context, containing all of the user's parameters 
               for (let context of contexts) {
@@ -40,26 +41,16 @@ app.post('/webhook', function (req, res) {
                 }
               }
 
-              console.log(cmsContext);
-            }
-
-            // Sample number Evaluation
-            if (requestBody.result.action === 'number.eval') {
-              var userResponse = parseInt(requestBody.result.resolvedQuery);
-
-              if (userResponse < 10) {
-                speech = 'You want Drupal!';
-              } else {
-                speech = 'You want Wordpress';
-              }
+              const siteSize = (parameter.developers < 20) ? siteSize = "small" : siteSize = "large"; 
+              
             }
           }
         }
 
         return res.json({
-            speech: speech,
+            speech: siteSize,
             source: 'drinkabout-webhook',
-            displayText: speech
+            displayText: siteSize
         });
 
 
