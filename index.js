@@ -40,7 +40,7 @@ app.post('/webhook', function (req, res) {
                 }
               }
 
-              console.log(context);
+              speech = context.lifespan;
             }
 
             // Sample number Evaluation
