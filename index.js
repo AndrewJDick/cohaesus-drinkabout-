@@ -22,6 +22,7 @@ app.post('/webhook', function (req, res) {
     try {
         var speech = '';
         var cmsContext = {};
+        var siteSize = 0;
 
         if (req.body) {
           var requestBody = req.body;
@@ -41,7 +42,7 @@ app.post('/webhook', function (req, res) {
               }
 
               const parameter = cmsContext.parameters;
-              const siteSize = parameter.developers;
+              siteSize = parameter.developers;
 
               console.log(siteSize);
               
