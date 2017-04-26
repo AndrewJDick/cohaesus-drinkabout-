@@ -19,8 +19,6 @@ app.listen(app.get('port'), function() {
 
 app.post('/webhook', function (req, res) {
 
-    console.log('hook request');
-
     try {
         var speech = 'empty speech';
 
@@ -29,6 +27,16 @@ app.post('/webhook', function (req, res) {
 
           if (requestBody.result) {
 
+            if (requestBody.result.action === 'tech.cms') {
+
+              result.parameters += "foo";
+
+              var foo = result.parameters;
+            }
+
+
+
+            // Sample number Evaluation
             if (requestBody.result.action === 'number.eval') {
               var userResponse = parseInt(requestBody.result.resolvedQuery);
 
@@ -41,13 +49,13 @@ app.post('/webhook', function (req, res) {
           }
         }
 
-        console.log('result: ', speech);
-
         return res.json({
-            speech: speech,
+            speech: foo,
             source: 'drinkabout-webhook',
             displayText: speech
         });
+
+
     } catch (err) {
         console.error("Can't process request", err);
 
