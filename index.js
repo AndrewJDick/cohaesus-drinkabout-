@@ -30,9 +30,8 @@ app.post('/webhook', function (req, res) {
 
             if (requestBody.result.action === 'tech.cms.evaluate') {
 
-              var contexts = requestBody.result.contexts; 
-              var cmsContext = {};
-              var parameter = cmsContext.parameters;
+              const contexts = requestBody.result.contexts; 
+              let cmsContext = {};
               
               // Locate and store the CMS context, containing all of the user's parameters 
               for (let context of contexts) {
@@ -41,7 +40,10 @@ app.post('/webhook', function (req, res) {
                 }
               }
 
-              const siteSize = (parameter.developers < 20) ? siteSize = "small" : siteSize = "large"; 
+              const parameter = cmsContext.parameters;
+              const siteSize = (parameter.developers < 20) ? "small" : "large"; 
+
+              console.log(siteSize);
               
             }
           }
