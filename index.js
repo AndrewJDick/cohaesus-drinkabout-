@@ -31,16 +31,16 @@ app.post('/webhook', function (req, res) {
             if (requestBody.result.action === 'tech.cms.evaluate') {
 
               var contexts = requestBody.result.contexts; 
-              var context;
+              var cmsContext;
               
               // Locate and store the CMS context, containing all of the user's parameters 
-              for (var context of contexts) {
+              for (let context of contexts) {
                 if (context.name === "tech-cms") {
-                  context += context;
+                  cmsContext = context;
                 }
               }
 
-              console.log(context);
+              console.log(cmsContext);
               speech = context.lifespan;
             }
 
