@@ -44,7 +44,7 @@ app.post('/webhook', function (req, res) {
               const siteSize = (cmsContext.parameters.developers < 20) ? "small" : "large";
 
               // Determine which language the user has chosen
-              const siteStack = cmsContext.parameters.['tech-stack'];
+              const siteStack = cmsContext.parameters['tech-stack'];
 
 
               return res.json({
