@@ -69,10 +69,9 @@ app.post('/webhook', function (req, res) {
                 cms = 'Magento';
               }
 
-              if (&& site.commerce === 'yes' && site.style === 'personalised') {
+              if (site.commerce === 'yes' && site.style === 'personalised') {
                 cms = 'Shopify';
               }              
-
 
               return res.json({
                 speech: cms,
