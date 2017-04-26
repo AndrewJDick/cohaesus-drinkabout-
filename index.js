@@ -31,7 +31,7 @@ app.post('/webhook', function (req, res) {
             if (requestBody.result.action === 'tech.cms.evaluate') {
 
               var contexts = requestBody.result.contexts; 
-              var cmsContext;
+              var cmsContext = {};
               
               // Locate and store the CMS context, containing all of the user's parameters 
               for (let context of contexts) {
@@ -41,7 +41,6 @@ app.post('/webhook', function (req, res) {
               }
 
               console.log(cmsContext);
-              speech = context.lifespan;
             }
 
             // Sample number Evaluation
