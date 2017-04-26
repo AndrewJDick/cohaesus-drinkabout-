@@ -40,15 +40,20 @@ app.post('/webhook', function (req, res) {
                 }
               }
 
+              // Bind the context parameters to a constant
               const parameter = cmsContext.parameters;
+
+              // Determine the size of the site, based on the number of developers working on the project.
               const siteSize = (parameter.developers < 20) ? "small" : "large";
 
-              console.log(siteSize); 
+              // Determine which language the user has chosen
+              const siteStack = parameter.tech-stack;
+
 
               return res.json({
-                  speech: siteSize,
+                  speech: siteStack,
                   source: 'drinkabout-evaluation',
-                  displayText: siteSize
+                  displayText: siteStack
               });             
             }
           }
