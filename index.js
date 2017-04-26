@@ -22,7 +22,6 @@ app.post('/webhook', function (req, res) {
     try {
         var speech = '';
         var cmsContext = {};
-        var siteSize = 0;
 
         if (req.body) {
           var requestBody = req.body;
@@ -42,19 +41,24 @@ app.post('/webhook', function (req, res) {
               }
 
               const parameter = cmsContext.parameters;
-              siteSize = parameter.developers;
+              const siteSize = (parameter.developers < 20) ? "small" : "large";
 
-              console.log(siteSize);              
+              console.log(siteSize); 
+
+              return res.json({
+                  speech: siteSize,
+                  source: 'drinkabout-evaluation',
+                  displayText: siteSize
+              });             
             }
           }
         }
 
         return res.json({
-            speech: siteSize,
+            speech: speech,
             source: 'drinkabout-webhook',
-            displayText: siteSize
+            displayText: speech
         });
-
 
     } catch (err) {
         console.error("Can't process request", err);
