@@ -57,19 +57,19 @@ app.post('/webhook', function (req, res) {
                 cms = 'Wordpress';
               }
 
-              if (site.size === 'small' && site.stack === 'php' && site.commerce === 'no' && site.style === 'brochure') {
+              if (site.size === 'small' && site.stack === '.net' && site.commerce === 'no' && site.style === 'brochure') {
                 cms = 'Umbraco';
               }
 
-              if (site.size === 'large' && site.stack === 'php' && site.commerce === 'no' && site.style === 'personalised') {
+              if (site.size === 'large' && site.stack === '.net' && site.commerce === 'no' && site.style === 'personalised') {
                 cms = 'Sitecore';
               }
 
-              if (site.size === 'small' && site.stack === 'php' && site.commerce === 'yes' && site.style === 'brochure') {
+              if (site.commerce === 'yes' && site.style === 'brochure') {
                 cms = 'Magento';
               }
 
-              if (site.size === 'small' && site.stack === 'php' && site.commerce === 'yes' && site.style === 'personalised') {
+              if (&& site.commerce === 'yes' && site.style === 'personalised') {
                 cms = 'Shopify';
               }              
 
