@@ -21,7 +21,7 @@ app.post('/webhook', function (req, res) {
 
     try {
         var speech = '';
-        var cms;
+        var cmsContext = {};
 
         if (req.body) {
           var requestBody = req.body;
@@ -31,15 +31,16 @@ app.post('/webhook', function (req, res) {
             if (requestBody.result.action === 'tech.cms.evaluate') {
 
               var contexts = requestBody.result.contexts; 
+              var context = {};
               
-              for (var i = 0; i < contexts.length; i++) {
-                if (contexts[i].name === "tech-cms") {
-                  cms = "winning";
+              // Locate and store the CMS context, containing all of the user's parameters 
+              for (let context of contexts) {
+                if (context.name === "tech-cms") {
+                  context;
                 }
               }
 
-
-              console.log(cms);
+              console.log(context);
             }
 
             // Sample number Evaluation
@@ -56,9 +57,9 @@ app.post('/webhook', function (req, res) {
         }
 
         return res.json({
-            speech: cms,
+            speech: speech,
             source: 'drinkabout-webhook',
-            displayText: cms
+            displayText: speech
         });
 
 
