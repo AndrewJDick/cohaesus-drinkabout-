@@ -41,7 +41,7 @@ app.post('/webhook', function (req, res) {
               }
 
               const parameter = cmsContext.parameters;
-              const siteSize = (parameter.developers < 20) ? "small" : "large"; 
+              const siteSize = parameter.developers;
 
               console.log(siteSize);
               
