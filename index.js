@@ -31,7 +31,7 @@ app.post('/webhook', function (req, res) {
             if (requestBody.result.action === 'tech.cms.evaluate') {
 
               var contexts = requestBody.result.contexts; 
-              var context = {};
+              var context;
               
               // Locate and store the CMS context, containing all of the user's parameters 
               for (var context of contexts) {
