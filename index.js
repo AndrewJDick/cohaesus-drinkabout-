@@ -36,7 +36,7 @@ app.post('/webhook', function (req, res) {
               // Locate and store the CMS context, containing all of the user's parameters 
               for (let context of contexts) {
                 if (context.name === "tech-cms") {
-                  context;
+                  context = context;
                 }
               }
 
