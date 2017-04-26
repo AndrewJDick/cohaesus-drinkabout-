@@ -44,8 +44,7 @@ app.post('/webhook', function (req, res) {
               const parameter = cmsContext.parameters;
               siteSize = parameter.developers;
 
-              console.log(siteSize);
-              
+              console.log(siteSize);              
             }
           }
         }
