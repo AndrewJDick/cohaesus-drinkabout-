@@ -30,7 +30,7 @@ app.post('/webhook', function (req, res) {
 
             if (requestBody.result.action === 'tech.cms.evaluate') {
 
-              var cms = requestBody.contexts.name; 
+              var cms = requestBody.results.contexts.name; 
 
               console.log(cms);
             }
