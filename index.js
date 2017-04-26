@@ -20,21 +20,18 @@ app.listen(app.get('port'), function() {
 app.post('/webhook', function (req, res) {
 
     try {
-        var speech = 'empty speech';
+        var speech = '';
+        var cms;
 
         if (req.body) {
           var requestBody = req.body;
 
           if (requestBody.result) {
 
-            if (requestBody.result.action === 'tech.cms') {
+            if (requestBody.result.action === 'tech.cms.evaluate') {
 
-              result.parameters += "foo";
-
-              var foo = result.parameters;
+              var cms = requestBody.contexts.name; 
             }
-
-
 
             // Sample number Evaluation
             if (requestBody.result.action === 'number.eval') {
@@ -50,9 +47,9 @@ app.post('/webhook', function (req, res) {
         }
 
         return res.json({
-            speech: foo,
+            speech: cms,
             source: 'drinkabout-webhook',
-            displayText: speech
+            displayText: cms
         });
 
 
