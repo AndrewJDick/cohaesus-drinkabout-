@@ -31,17 +31,18 @@ app.post('/webhook', function (req, res) {
             if (requestBody.result.action === 'tech.cms.evaluate') {
 
               const contexts = requestBody.result.contexts; 
-              let cmsContext = {};
-              let speech = '';
-
-              const CMS = {
+              const cms = {
                 wordpress: 'Wordpress',
                 drupal: 'Drupal',
                 umbraco: 'Umbraco',
                 sitecore: 'Sitecore',
                 magento: 'Magento',
                 shopify: 'Shopify'
-              }
+              };
+
+              let cmsContext = {};
+              let speech = '';
+              let chosenCMS = '';
               
               // Locate and store the current CMS context, containing all of the user's parameters 
               for (let context of contexts) {
@@ -58,12 +59,38 @@ app.post('/webhook', function (req, res) {
                 features: cmsContext.parameters['tech-features'] || []
               };
 
-              const chooseCMS = function(requirements) {
-                console.log(this);
+              const evaluate = function() {
+
+                // E-Commerce CMS
+                if (requirements.commerce === true) 
+                  if (requirements.features.length > 0) {
+                    return cms.magento;
+                  } else {
+                    return cms.shopify;
+                  }
+                } 
+
+                else {
+                  if (requirements.stack === '.php' && requirements.brochure === true) {
+                    return cms.wordpress;
+                  }
+
+                  if (requirements.stack === '.net' && requirements.brochure === true) {
+                    return cms.drupal;
+                  }
+
+                  if (requirements.stack === '.php' && requirements.brochure === false && requirements.features.length > 0) {
+                    return cms.umbraco;
+                  }
+
+                  if (requirements.stack === '.net' && requirements.brochure === false && requirements.features.length < 1) {
+                    return cms.sitecore;
+                  }
+                }
               }();
 
               return res.json({
-                speech: 'evaluate',
+                speech: evaluate,
                 source: 'drinkabout-evaluation-cms',
                 displayText: 'evaluate'
               });             
