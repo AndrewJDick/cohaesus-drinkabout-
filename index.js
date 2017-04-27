@@ -52,35 +52,34 @@ app.post('/webhook', function (req, res) {
 
               const evaluate = function() {
 
-                // E-Commerce CMS
                 if (requirements.ecommerce === true) {
                   if (requirements.features.length > 0) {
-                    return "Magento";
+                    return 'Magento';
                   } else {
-                    return"Shopify";
+                    return 'Shopify';
                   }
                 } 
 
                 else {
                   if (requirements.stack === 'php' && requirements.brochure === true) {
-                    chosenCMS = "Wordpress";
-                    return "Wordpress";
+                    chosenCMS = 'Wordpress';
+                    return 'Wordpress';
                   }
 
                   if (requirements.stack === '.net' && requirements.brochure === true) {
-                    return "Drupal";
+                    return 'Drupal';
                   }
 
                   if (requirements.stack === 'php' && requirements.brochure === false && requirements.features.length > 0) {
-                    return "Umbraco";
+                    return 'Umbraco';
                   }
 
                   if (requirements.stack === '.net' && requirements.brochure === false && requirements.features.length < 1) {
-                    return = "Sitecore";
+                    return 'Sitecore';
                   }
 
                   else {
-                    return = 'Unknown';
+                    return 'Unknown';
                   }
                 }
               }();
