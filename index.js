@@ -33,6 +33,15 @@ app.post('/webhook', function (req, res) {
               const contexts = requestBody.result.contexts; 
               let cmsContext = {};
               let speech = '';
+
+              const CMS = {
+                wordpress: 'Wordpress',
+                drupal: 'Drupal',
+                umbraco: 'Umbraco',
+                sitecore: 'Sitecore',
+                magento: 'Magento',
+                shopify: 'Shopify'
+              }
               
               // Locate and store the current CMS context, containing all of the user's parameters 
               for (let context of contexts) {
@@ -42,18 +51,24 @@ app.post('/webhook', function (req, res) {
               }
 
               // cms object created as a basis of evaluation.
-              const cms = {
+              const requirements = {
                 stack: cmsContext.parameters['tech-stack'],
                 brochure: cmsContext.parameters.brochure === 'yes' ? true : false,
                 commerce: cmsContext.parameters.ecommerce === 'yes' ? true : false,
                 features: cmsContext.parameters['tech-features'] || []
               };
 
-              console.log(cms);                          
+              switch(requirements) {
+                case requirements.stack = 'php' && requirements.brochure = true:
+                  console.log('winning');
+                  break;
+                default:
+                  console.log('losing');
+              }
 
               return res.json({
                 speech: 'evaluate',
-                source: 'drinkabout-evaluation',
+                source: 'drinkabout-evaluation-cms',
                 displayText: 'evaluate'
               });             
             }
