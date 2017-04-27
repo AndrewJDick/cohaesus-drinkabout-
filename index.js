@@ -63,7 +63,7 @@ app.post('/webhook', function (req, res) {
                 } 
 
                 else {
-                  if (requirements.stack === '.php' && requirements.brochure === true) {
+                  if (requirements.stack === 'php' && requirements.brochure === true) {
                     chosenCMS = "Wordpress";
                     return "Wordpress";
                   }
@@ -72,7 +72,7 @@ app.post('/webhook', function (req, res) {
                     chosenCMS = "Drupal";
                   }
 
-                  if (requirements.stack === '.php' && requirements.brochure === false && requirements.features.length > 0) {
+                  if (requirements.stack === 'php' && requirements.brochure === false && requirements.features.length > 0) {
                     chosenCMS = "Umbraco";
                   }
 
