@@ -58,12 +58,12 @@ app.post('/webhook', function (req, res) {
                 features: cmsContext.parameters['tech-features'] || []
               };
 
-              switch(requirements) {
-                case requirements.stack = 'php' && requirements.brochure = true:
-                  console.log('winning');
-                  break;
-                default:
-                  console.log('losing');
+              (requirements) => {
+                console.log(this.stack);
+                console.log(this.brochure);
+                console.log(this.commerce);
+                console.log(this.features);
+
               }
 
               return res.json({
