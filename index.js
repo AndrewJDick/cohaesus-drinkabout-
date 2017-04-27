@@ -74,7 +74,7 @@ app.post('/webhook', function (req, res) {
                     return 'Drupal';
                   }
 
-                  if (requirements.stack === '.net' && requirements.brochure === false && requirements.features.length < 1) {
+                  if (requirements.stack === '.net' && requirements.brochure === false && requirements.features.length > 0) {
                     return 'Sitecore';
                   }
 
