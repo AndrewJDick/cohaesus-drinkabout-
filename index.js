@@ -60,13 +60,13 @@ app.post('/webhook', function (req, res) {
 
               var foo;
 
-              const chooseCMS = (requirements) => {
+              const chooseCMS = function(requirements) {
                 // console.log(this.stack);
                 // console.log(this.brochure);
                 // console.log(this.commerce);
                 // console.log(this.features);
                 foo = "bar";
-              };
+              }();
 
               console.log(foo);
 
