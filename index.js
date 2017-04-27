@@ -34,7 +34,6 @@ app.post('/webhook', function (req, res) {
 
               let cmsContext = {};
               let speech = '';
-              let chosenCMS = '';
               
               // Locate and store the current CMS context, containing all of the user's parameters 
               for (let context of contexts) {
@@ -56,9 +55,9 @@ app.post('/webhook', function (req, res) {
                 // E-Commerce CMS
                 if (requirements.ecommerce === true) {
                   if (requirements.features.length > 0) {
-                    chosenCMS = "Magento";
+                    return "Magento";
                   } else {
-                    chosenCMS = "Shopify";
+                    return"Shopify";
                   }
                 } 
 
@@ -69,19 +68,19 @@ app.post('/webhook', function (req, res) {
                   }
 
                   if (requirements.stack === '.net' && requirements.brochure === true) {
-                    chosenCMS = "Drupal";
+                    return "Drupal";
                   }
 
                   if (requirements.stack === 'php' && requirements.brochure === false && requirements.features.length > 0) {
-                    chosenCMS = "Umbraco";
+                    return "Umbraco";
                   }
 
                   if (requirements.stack === '.net' && requirements.brochure === false && requirements.features.length < 1) {
-                    chosenCMS = "Sitecore";
+                    return = "Sitecore";
                   }
 
                   else {
-                    chosenCMS = 'Unknown';
+                    return = 'Unknown';
                   }
                 }
               }();
@@ -91,9 +90,9 @@ app.post('/webhook', function (req, res) {
               console.log(chosenCMS);
 
               return res.json({
-                speech: chosenCMS,
+                speech: evaluate,
                 source: 'drinkabout-evaluation-cms',
-                displayText: chosenCMS
+                displayText: evaluate
               });             
             }
           }
