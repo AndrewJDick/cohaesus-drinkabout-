@@ -58,14 +58,9 @@ app.post('/webhook', function (req, res) {
                 features: cmsContext.parameters['tech-features'] || []
               };
 
-              var foo;
-
               const chooseCMS = function(requirements) {
-                console.log(this.stack);
-                console.log(this.brochure);
-                console.log(this.commerce);
-                console.log(this.features);
-              }().bind();
+                console.log(this);
+              }();
 
               return res.json({
                 speech: 'evaluate',
