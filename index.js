@@ -21,9 +21,9 @@ app.listen(app.get('port'), function() {
 app.post('/webhook', function (req, res) {
 
     try {
-        var cms; 
         var speech = '';
         var cmsContext = {};
+        var cms = {}; 
 
         if (req.body) {
           var requestBody = req.body;
@@ -46,7 +46,8 @@ app.post('/webhook', function (req, res) {
               const cms = {
                 stack: cmsContext.parameters['tech-stack'],
                 brochure: cmsContext.parameters.brochure,
-                commerce: cmsContext.parameters.ecommerce
+                features: cmsContext.parameters.features || [],
+                commerce: cmsContext.parameters.ecommerce || "no";
               };
 
               console.log(cms);                          
