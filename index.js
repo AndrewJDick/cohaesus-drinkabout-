@@ -46,7 +46,7 @@ app.post('/webhook', function (req, res) {
                 stack: cmsContext.parameters['tech-stack'],
                 brochure: cmsContext.parameters.brochure === 'yes' ? true : false,
                 commerce: cmsContext.parameters.ecommerce === 'yes' ? true : false,
-                features: cmsContext.parameters.features || []
+                features: cmsContext.parameters.['tech-features'] || []
               };
 
               console.log(cms);                          
