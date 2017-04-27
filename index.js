@@ -43,11 +43,12 @@ app.post('/webhook', function (req, res) {
               }
 
               // Determine the size of the site, based on the number of developers working on the project.
+              // Fallback values added in the event that brochure is set to true.
               const cms = {
                 stack: cmsContext.parameters['tech-stack'],
-                brochure: cmsContext.parameters.brochure,
+                brochure: cmsContext.parameters.brochure === 'true' ? true : false,
                 features: cmsContext.parameters.features || [],
-                commerce: cmsContext.parameters.ecommerce || "no"
+                commerce: cmsContext.parameters.ecommerce === 'true' ? true : false
               };
 
               console.log(cms);                          
