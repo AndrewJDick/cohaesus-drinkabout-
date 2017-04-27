@@ -85,12 +85,12 @@ app.post('/webhook', function (req, res) {
                 }
               }();
 
-              console.log(evaluate);
+              console.log(chosenCMS);
 
               return res.json({
-                speech: evaluate,
+                speech: chosenCMS,
                 source: 'drinkabout-evaluation-cms',
-                displayText: evaluate
+                displayText: chosenCMS
               });             
             }
           }
