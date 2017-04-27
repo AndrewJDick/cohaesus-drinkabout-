@@ -65,7 +65,7 @@ app.post('/webhook', function (req, res) {
                 console.log(this.brochure);
                 console.log(this.commerce);
                 console.log(this.features);
-              }();
+              }().bind();
 
               return res.json({
                 speech: 'evaluate',
