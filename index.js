@@ -59,10 +59,12 @@ app.post('/webhook', function (req, res) {
               };
 
               const chooseCMS = (requirements) => {
-                console.log(this.stack);
-                console.log(this.brochure);
-                console.log(this.commerce);
-                console.log(this.features);
+                // console.log(this.stack);
+                // console.log(this.brochure);
+                // console.log(this.commerce);
+                // console.log(this.features);
+
+                console.log(foo);
               };
 
               return res.json({
