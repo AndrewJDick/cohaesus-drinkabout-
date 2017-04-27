@@ -65,6 +65,7 @@ app.post('/webhook', function (req, res) {
                 else {
                   if (requirements.stack === '.php' && requirements.brochure === true) {
                     chosenCMS = "Wordpress";
+                    return "Wordpress";
                   }
 
                   if (requirements.stack === '.net' && requirements.brochure === true) {
@@ -85,6 +86,8 @@ app.post('/webhook', function (req, res) {
                 }
               }();
 
+              console.log(requirements);
+              console.log(evaluate);
               console.log(chosenCMS);
 
               return res.json({
