@@ -62,7 +62,7 @@ app.post('/webhook', function (req, res) {
               const evaluate = function() {
 
                 // E-Commerce CMS
-                if (requirements.commerce === true) 
+                if (requirements.commerce === true) {
                   if (requirements.features.length > 0) {
                     return cms.magento;
                   } else {
