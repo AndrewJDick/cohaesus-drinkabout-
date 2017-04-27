@@ -18,9 +18,6 @@ app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
-
-ef57d39216434fb8baa0513cd98cf800
-
 app.post('/webhook', function (req, res) {
 
     try {
