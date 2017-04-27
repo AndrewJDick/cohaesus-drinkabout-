@@ -47,7 +47,7 @@ app.post('/webhook', function (req, res) {
                 stack: cmsContext.parameters['tech-stack'],
                 brochure: cmsContext.parameters.brochure,
                 features: cmsContext.parameters.features || [],
-                commerce: cmsContext.parameters.ecommerce || "no";
+                commerce: cmsContext.parameters.ecommerce || "no"
               };
 
               console.log(cms);                          
