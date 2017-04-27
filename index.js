@@ -31,14 +31,6 @@ app.post('/webhook', function (req, res) {
             if (requestBody.result.action === 'tech.cms.evaluate') {
 
               const contexts = requestBody.result.contexts; 
-              const cms = {
-                wordpress: 'Wordpress',
-                drupal: 'Drupal',
-                umbraco: 'Umbraco',
-                sitecore: 'Sitecore',
-                magento: 'Magento',
-                shopify: 'Shopify'
-              };
 
               let cmsContext = {};
               let speech = '';
@@ -64,27 +56,31 @@ app.post('/webhook', function (req, res) {
                 // E-Commerce CMS
                 if (requirements.ecommerce === true) {
                   if (requirements.features.length > 0) {
-                    return cms.magento;
+                    chosenCMS = "Magento";
                   } else {
-                    return cms.shopify;
+                    chosenCMS = "Shopify";
                   }
                 } 
 
                 else {
                   if (requirements.stack === '.php' && requirements.brochure === true) {
-                    return 'foo';
+                    chosenCMS = "Wordpress";
                   }
 
                   if (requirements.stack === '.net' && requirements.brochure === true) {
-                    return cms.drupal;
+                    chosenCMS = "Drupal";
                   }
 
                   if (requirements.stack === '.php' && requirements.brochure === false && requirements.features.length > 0) {
-                    return cms.umbraco;
+                    chosenCMS = "Umbraco";
                   }
 
                   if (requirements.stack === '.net' && requirements.brochure === false && requirements.features.length < 1) {
-                    return cms.sitecore;
+                    chosenCMS = "Sitecore";
+                  }
+
+                  else {
+                    chosen CMS = 'Unknown';
                   }
                 }
               }();
