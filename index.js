@@ -65,7 +65,7 @@ app.post('/webhook', function (req, res) {
                 // console.log(this.features);
 
                 console.log(foo);
-              };
+              }();
 
               return res.json({
                 speech: 'evaluate',
