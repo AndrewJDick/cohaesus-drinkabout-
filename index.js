@@ -67,11 +67,11 @@ app.post('/webhook', function (req, res) {
                   }
 
                   if (requirements.stack === '.net' && requirements.brochure === true) {
-                    return 'Drupal';
+                    return 'Umbraco';
                   }
 
                   if (requirements.stack === 'php' && requirements.brochure === false && requirements.features.length > 0) {
-                    return 'Umbraco';
+                    return 'Drupal';
                   }
 
                   if (requirements.stack === '.net' && requirements.brochure === false && requirements.features.length < 1) {
@@ -83,10 +83,6 @@ app.post('/webhook', function (req, res) {
                   }
                 }
               }();
-
-              console.log(requirements);
-              console.log(evaluate);
-              console.log(chosenCMS);
 
               return res.json({
                 speech: evaluate,
