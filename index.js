@@ -80,7 +80,7 @@ app.post('/webhook', function (req, res) {
                   }
 
                   else {
-                    chosen CMS = 'Unknown';
+                    chosenCMS = 'Unknown';
                   }
                 }
               }();
