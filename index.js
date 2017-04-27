@@ -48,8 +48,8 @@ app.post('/webhook', function (req, res) {
               // Determine the size of the site, based on the number of developers working on the project.
               const cms = {
                 stack: cmsContext.parameters['tech-stack'],
-                brochure: (cmsContext.parameters['ecommerce'] === "yes") ? true : false,
-                commerce: (cmsContext.parameters['ecommerce'] === "yes") ? true : false,
+                brochure: cmsContext.parameters['ecommerce'],
+                commerce: cmsContext.parameters['ecommerce'],
                 style: cmsContext.parameters['tech-site-style']
               };
 
