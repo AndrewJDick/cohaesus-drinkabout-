@@ -3,6 +3,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 
 var app = express();
+var agent = 
 
 app.set('port', (process.env.PORT || 5000));
 
@@ -17,6 +18,9 @@ app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
+
+ef57d39216434fb8baa0513cd98cf800
+
 app.post('/webhook', function (req, res) {
 
     try {
@@ -27,14 +31,14 @@ app.post('/webhook', function (req, res) {
         if (req.body) {
           var requestBody = req.body;
 
-          if (requestBody.result) {
+          if (requestBody.result) {          
 
             if (requestBody.result.action === 'tech.cms.evaluate') {
 
               const contexts = requestBody.result.contexts; 
               let cmsContext = {};
               
-              // Locate and store the CMS context, containing all of the user's parameters 
+              // Locate and store the current CMS context, containing all of the user's parameters 
               for (let context of contexts) {
                 if (context.name === "tech-cms") {
                   cmsContext = context;
@@ -42,36 +46,14 @@ app.post('/webhook', function (req, res) {
               }
 
               // Determine the size of the site, based on the number of developers working on the project.
-              const site = {
-                size: cmsContext.parameters['developers'] < 20 ? "small" : "large",
+              const cms = {
                 stack: cmsContext.parameters['tech-stack'],
-                commerce: cmsContext.parameters['ecommerce'],
+                brochure: (cmsContext.parameters['ecommerce'] === "yes") ? true : false,
+                commerce: (cmsContext.parameters['ecommerce'] === "yes") ? true : false,
                 style: cmsContext.parameters['tech-site-style']
               };
 
-              if (site.size === 'small' && site.stack === 'php' && site.commerce === 'no' && site.style === 'brochure') {
-                cms = 'Drupal';
-              }
-
-              if (site.size === 'large' && site.stack === 'php' && site.commerce === 'no' && site.style === 'personalised') {
-                cms = 'Wordpress';
-              }
-
-              if (site.size === 'small' && site.stack === '.net' && site.commerce === 'no' && site.style === 'brochure') {
-                cms = 'Umbraco';
-              }
-
-              if (site.size === 'large' && site.stack === '.net' && site.commerce === 'no' && site.style === 'personalised') {
-                cms = 'Sitecore';
-              }
-
-              if (site.commerce === 'yes' && site.style === 'brochure') {
-                cms = 'Magento';
-              }
-
-              if (site.commerce === 'yes' && site.style === 'personalised') {
-                cms = 'Shopify';
-              }              
+              console.log(cms);                          
 
               return res.json({
                 speech: cms,
