@@ -31,7 +31,7 @@ app.post('/webhook', function (req, res) {
         if (req.body) {
           var requestBody = req.body;
 
-          if (requestBody.result) {          
+          if (requestBody.result) {
 
             if (requestBody.result.action === 'tech.cms.evaluate') {
 
@@ -49,7 +49,7 @@ app.post('/webhook', function (req, res) {
               const cms = {
                 stack: cmsContext.parameters['tech-stack'],
                 brochure: cmsContext.parameters.brochure,
-                commerce: cmsContext.parameters.ecommerce,
+                commerce: cmsContext.parameters.ecommerce
               };
 
               console.log(cms);                          
