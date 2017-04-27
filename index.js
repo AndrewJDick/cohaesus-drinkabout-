@@ -21,9 +21,7 @@ app.listen(app.get('port'), function() {
 app.post('/webhook', function (req, res) {
 
     try {
-        var speech = '';
-        var cmsContext = {};
-        var cms = {}; 
+        let speech = '';
 
         if (req.body) {
           var requestBody = req.body;
@@ -34,6 +32,7 @@ app.post('/webhook', function (req, res) {
 
               const contexts = requestBody.result.contexts; 
               let cmsContext = {};
+              let speech = '';
               
               // Locate and store the current CMS context, containing all of the user's parameters 
               for (let context of contexts) {
@@ -42,13 +41,12 @@ app.post('/webhook', function (req, res) {
                 }
               }
 
-              // Determine the size of the site, based on the number of developers working on the project.
-              // Fallback values added in the event that brochure is set to true.
+              // cms object created as a basis of evaluation.
               const cms = {
                 stack: cmsContext.parameters['tech-stack'],
-                brochure: cmsContext.parameters.brochure === 'true' ? true : false,
-                features: cmsContext.parameters.features || [],
-                commerce: cmsContext.parameters.ecommerce === 'true' ? true : false
+                brochure: cmsContext.parameters.brochure === 'yes' ? true : false,
+                commerce: cmsContext.parameters.ecommerce === 'yes' ? true : false,
+                features: cmsContext.parameters.features || []
               };
 
               console.log(cms);                          
