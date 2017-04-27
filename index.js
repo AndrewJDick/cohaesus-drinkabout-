@@ -55,14 +55,14 @@ app.post('/webhook', function (req, res) {
               const requirements = {
                 stack: cmsContext.parameters['tech-stack'],
                 brochure: cmsContext.parameters.brochure === 'yes' ? true : false,
-                commerce: cmsContext.parameters.ecommerce === 'yes' ? true : false,
+                ecommerce: cmsContext.parameters.ecommerce === 'yes' ? true : false,
                 features: cmsContext.parameters['tech-features'] || []
               };
 
               const evaluate = function() {
 
                 // E-Commerce CMS
-                if (requirements.commerce === true) {
+                if (requirements.ecommerce === true) {
                   if (requirements.features.length > 0) {
                     return cms.magento;
                   } else {
@@ -88,6 +88,8 @@ app.post('/webhook', function (req, res) {
                   }
                 }
               }();
+
+              console.log(evaluate);
 
               return res.json({
                 speech: evaluate,
