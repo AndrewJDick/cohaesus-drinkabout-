@@ -92,7 +92,7 @@ app.post('/webhook', function (req, res) {
               return res.json({
                 speech: evaluate,
                 source: 'drinkabout-evaluation-cms',
-                displayText: 'evaluate'
+                displayText: evaluate
               });             
             }
           }
