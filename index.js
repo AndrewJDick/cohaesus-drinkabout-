@@ -72,7 +72,7 @@ app.post('/webhook', function (req, res) {
 
                 else {
                   if (requirements.stack === '.php' && requirements.brochure === true) {
-                    return cms.wordpress;
+                    return 'foo';
                   }
 
                   if (requirements.stack === '.net' && requirements.brochure === true) {
