@@ -145,9 +145,7 @@ app.post('/webhook', function (req, res) {
                 let ecommerce = (requirements.ecommerce) ? 'requires e-commerce' : 'does not require e-commerce';
                 let features = featureList || 'no features';
 
-                console.log(brochure);
-
-                if (brochure) {
+                if (requirements.brochure) {
                   if (evaluate !== 'unknown') {
                     return `You want a ${requirements.stack}-based ${brochure} CMS.\nI would definitely recommend ${evaluate}!\n Type 'reset' to start again.`
                   } else {
