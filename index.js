@@ -71,7 +71,9 @@ app.post('/webhook', function (req, res) {
                 let features = '';
 
                 for (let feature in requirements.features) {
-                  features += (requirements.features[feature] !== requirements.features[requirements.features.length-1]) ?  `${requirements.features[feature]}, ` : `and ${requirements.features[feature]},`;
+                  features += (requirements.features[feature] !== requirements.features[requirements.features.length-1]) 
+                    ?  `${requirements.features[feature]}, ` 
+                    : `and ${requirements.features[feature]},`;
                 }
 
                 return features;
@@ -91,21 +93,19 @@ app.post('/webhook', function (req, res) {
                 else {
                   if (!requirements.brochure || requirements.brochure && !advancedSite) {
                     switch(requirements.stack) {
-                      case 'php':   return 'Wordpress';
+                      case 'php': return 'Wordpress';
                       case '.net' : return 'Umbraco';
                     }
                   }
 
                   if (requirements.brochure && advancedSite) {
                     switch(requirements.stack) {
-                      case 'php':   return 'Drupal';
+                      case 'php': return 'Drupal';
                       case '.net' : return 'Sitecore';
                     }
                   }
 
-                  else {
-                    return 'Beats me. I have failed you, Senpai. Type reset to start over *commits seppuku*';
-                  }
+                  return 'fail';
                 }
               }();
 
@@ -116,7 +116,11 @@ app.post('/webhook', function (req, res) {
                 let ecommerce = (requirements.ecommerce) ? 'requires e-commerce' : 'does not require e-commerce';
                 let features = featureList || 'no features';
 
-                return `You want a ${brochure} ${requirements.stack}-based CMS, with ${features} and ${ecommerce} functionality. \nI would definitely recommend ${evaluate}!`
+                if (evaluate !== 'fail') {
+                  return `You want a ${brochure} ${requirements.stack}-based CMS, with ${features} and ${ecommerce} functionality. \nI would definitely recommend ${evaluate}!`
+                } else {
+                  return `I have failed you, Senpai. Type reset to start over *commits seppuku*`
+                }
               }();
 
               return res.json({
