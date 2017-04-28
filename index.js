@@ -50,17 +50,21 @@ app.post('/webhook', function (req, res) {
                 features: cmsContext.parameters['tech-features'] || []
               };
 
-              // TODO: Pull the entity values from the API.AI agent entity, rather than hard-coding.
-              const advancedFeatures = ['multi-site', 'multi-lingual', 'personalisation', 'dynamic forms', 'interactive elements', 'user accounts', 'dynamic forms', 'interactive elements'];
+              
+              const siteScope = function() {
+                
+                // TODO: Pull the entity values from the API.AI agent entity, rather than hard-coding.
+                const advancedFeatures = ['multi-site', 'multi-lingual', 'personalisation', 'dynamic forms', 'interactive elements', 'user accounts', 'dynamic forms', 'interactive elements'];
 
-              // If the features array contains any advanced features, switch requirements.level to advanced.
-              for (let feature in requirements.features) {
-                for (let advancedFeature in advancedFeatures) {
-                  if (requirements.features[feature] === advancedFeatures[advancedFeature]) {
-                    advancedSite = true;
+                // If the features array contains any advanced features, switch requirements.level to advanced.
+                for (let feature in requirements.features) {
+                  for (let advancedFeature in advancedFeatures) {
+                    if (requirements.features[feature] === advancedFeatures[advancedFeature]) {
+                      advancedSite = true;
+                    }
                   }
                 }
-              }
+              }();
 
               // Output all features to a single string value
               const featureList = function() {
@@ -116,6 +120,11 @@ app.post('/webhook', function (req, res) {
                 return 'foo';
                 //return `You want a ${brochure} ${requirements.stack}-based CMS, with ${features} and ${ecommerce} functionality. \nI would definitely recommend ${evaluate}!`
               }
+
+              console.log(siteScope);
+              console.log(featureList);
+              console.log(evaluate);
+              console.log(speech);
 
               return res.json({
                 speech: speech,
