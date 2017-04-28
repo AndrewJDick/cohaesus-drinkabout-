@@ -119,9 +119,9 @@ app.post('/webhook', function (req, res) {
 
                 return 'foo';
                 //return `You want a ${brochure} ${requirements.stack}-based CMS, with ${features} and ${ecommerce} functionality. \nI would definitely recommend ${evaluate}!`
-              }
+              }();
 
-              console.log(siteScope);
+              console.log(advancedSite);
               console.log(featureList);
               console.log(evaluate);
               console.log(speech);
