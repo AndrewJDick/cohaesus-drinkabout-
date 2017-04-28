@@ -113,7 +113,8 @@ app.post('/webhook', function (req, res) {
                 let features = featureList || '';
                 let cms = evaluate;
 
-                return `You want a ${brochure} ${requirements.stack}-based CMS, with ${features} and ${ecommerce} functionality. \nI would definitely recommend ${evaluate}!`
+                return 'foo';
+                //return `You want a ${brochure} ${requirements.stack}-based CMS, with ${features} and ${ecommerce} functionality. \nI would definitely recommend ${evaluate}!`
               }
 
               
