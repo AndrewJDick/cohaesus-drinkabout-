@@ -58,7 +58,7 @@ app.post('/webhook', function (req, res) {
               // If the features array contains any advanced features, switch requirements.level to advanced.
               for (let feature in requirements.features) {
                 for (let advancedFeature in advancedFeatures) {
-                  if (requirements.feature[feature] === advancedFeatures[advancedFeature]) {
+                  if (requirements.features[feature] === advancedFeatures[advancedFeature]) {
                     advancedSite = true;
                   }
                 }
