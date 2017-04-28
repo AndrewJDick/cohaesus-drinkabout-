@@ -88,12 +88,11 @@ app.post('/webhook', function (req, res) {
 
               // Final Outcome
               for (let feature in requirements.features) {
-
-                features += (feature === requirements.features[requirements.features.length -1]) ?  `${feature}, ` : `and ${feature}.`;
+                features += (requirements.features[feature] === requirements.features[requirements.features.length-1]) ?  `${requirements.features[feature]}, ` : `and ${requirements.features[feature]}.`;
               }
 
               console.log(features); 
-              
+
               //speech = `You want a ${requirements.stack}-based CMS, `
 
               return res.json({
