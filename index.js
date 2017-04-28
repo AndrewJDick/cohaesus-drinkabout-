@@ -72,8 +72,10 @@ app.post('/webhook', function (req, res) {
 
                 for (let feature in requirements.features) {
                   features += (requirements.features[feature] !== requirements.features[requirements.features.length-1]) 
-                    ?  `${requirements.features[feature]}, ` 
-                    : `and ${requirements.features[feature]},`;
+                    ? `${requirements.features[feature]}, ` 
+                    : (requirements.features.length > 1) 
+                      ? `and ${requirements.features[feature]},` 
+                      : `${requirements.features[feature]},`;
                 }
 
                 return features;
