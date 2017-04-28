@@ -28,6 +28,35 @@ app.post('/webhook', function (req, res) {
 
           if (requestBody.result) {
 
+            if (requestBody.result.action === 'tech.cms.stack') {
+              const contexts = requestBody.result.contexts; 
+              let cmsContext = {};
+
+              // Locate and store the current CMS context, containing all of the user's parameters 
+              for (let context of contexts) {
+                if (context.name === "tech-cms") {
+                  cmsContext = context;
+                }
+              }
+
+              let techStack = cmsContext.parameters.stack;
+              let speech = '';
+
+              if (techstack === 'no preference') {
+                cmsContext.parameters.stack = 'php';
+                speech = `No preference? No worries!\n Are you looking for a simple brochure website?`; 
+              } else {
+                speech = `${techStack}? A fine choice!\n Are you looking for a simple brochure website?`;
+              }
+
+              return res.json({
+                speech: speech,
+                source: 'drinkabout-webhook-stack',
+                displayText: speech
+              });
+
+            }
+
             if (requestBody.result.action === 'tech.cms.evaluate') {
 
               const contexts = requestBody.result.contexts; 
