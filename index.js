@@ -73,8 +73,8 @@ app.post('/webhook', function (req, res) {
               // Evaluate the parameters and return the correct CMS based on the user requirements.
               const evaluate = function() {
 
-                if (requirements.ecommerce === true) {
-                  if (advancedSite === true) {
+                if (requirements.ecommerce) {
+                  if (advancedSite) {
                     return 'Magento';
                   } else {
                     return 'Shopify';
@@ -82,24 +82,26 @@ app.post('/webhook', function (req, res) {
                 } 
 
                 else {
-                  if (requirements.stack === 'php' && requirements.brochure === true) {
-                    return 'Wordpress';
+                  if (requirements.brochure || advancedSite) {
+                    switch(requirements.stack) {
+                      case 'php': 
+                        return 'Wordpress';
+                      case '.net' : 
+                        return 'Umbraco';
+                    }
                   }
 
-                  if (requirements.stack === '.net' && requirements.brochure === true) {
-                    return 'Umbraco';
-                  }
-
-                  if (requirements.stack === 'php' && requirements.brochure === false && advancedSite === true) {
-                    return 'Drupal';
-                  }
- 
-                  if (requirements.stack === '.net' && requirements.brochure === false && advancedSite === true) {
-                    return 'Sitecore';
+                  if (requirements.brochure && advancedSite) {
+                    switch(requirements.stack) {
+                      case 'php': 
+                        return 'Drupal';
+                      case '.net' : 
+                        return 'Sitecore';
+                    }
                   }
 
                   else {
-                    return 'Unknown';
+                    return 'Beats me. I have failed you, Senpai. *commits seppuku*';
                   }
                 }
               }();
