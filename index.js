@@ -82,7 +82,7 @@ app.post('/webhook', function (req, res) {
                 } 
 
                 else {
-                  if (requirements.brochure || advancedSite) {
+                  if (!requirements.brochure || requirements.brochure && !advancedSite) {
                     switch(requirements.stack) {
                       case 'php': 
                         return 'Wordpress';
