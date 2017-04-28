@@ -121,7 +121,7 @@ app.post('/webhook', function (req, res) {
                   if (evaluate !== 'unknown') {
                     return `You want a ${requirements.stack}-based ${brochure} CMS.\nI would definitely recommend ${evaluate}!\n Type 'reset' to start again.`
                   } else {
-                    return `You want a ${brochure} CMS.\nI can't match a suitable CMS with your chosen tech stack (${requirements.stack}).\nHopefully my knowledge base will grow as the app continues to learn!\n Type 'reset' to start again.`
+                    return `I can't match a suitable CMS with your chosen tech stack (*${requirements.stack}*).\nHopefully my knowledge base will grow as the app continues to learn!\n Type 'reset' to start again.`
                   }
                 } else {
                   if (evaluate !== 'unknown') {
