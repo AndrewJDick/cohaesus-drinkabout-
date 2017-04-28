@@ -73,7 +73,7 @@ app.post('/webhook', function (req, res) {
                   if (requirements.stack === 'php' && requirements.brochure === false && requirements.features.length > 0) {
                     return 'Drupal';
                   }
-
+ 
                   if (requirements.stack === '.net' && requirements.brochure === false && requirements.features.length > 0) {
                     return 'Sitecore';
                   }
@@ -83,6 +83,18 @@ app.post('/webhook', function (req, res) {
                   }
                 }
               }();
+
+              let features = '';
+
+              // Final Outcome
+              for (let feature in requirements.features) {
+
+                features += (feature === requirements.features[requirements.features.length -1]) ?  `${feature}, ` : `and ${feature}.`;
+              }
+
+              console.log(features); 
+              
+              //speech = `You want a ${requirements.stack}-based CMS, `
 
               return res.json({
                 speech: evaluate,
