@@ -28,6 +28,14 @@ app.post('/webhook', function (req, res) {
 
           if (requestBody.result) {
 
+            if (requestBody.result.action === 'default.reset') {
+              return res.json({
+                speech: '/giphy reset',
+                source: 'drinkabout-evaluation-cms',
+                displayText: '/giphy reset'
+              });
+            }
+
             if (requestBody.result.action === 'tech.cms.evaluate') {
 
               const contexts = requestBody.result.contexts; 
