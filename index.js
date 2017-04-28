@@ -33,8 +33,6 @@ app.post('/webhook', function (req, res) {
               const contexts = requestBody.result.contexts; 
 
               let cmsContext = {};
-              let speech = '';
-              let features = '';
               let advancedSite = false;
               
               // Locate and store the current CMS context, containing all of the user's parameters 
