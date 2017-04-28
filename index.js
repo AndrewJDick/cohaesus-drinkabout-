@@ -114,17 +114,10 @@ app.post('/webhook', function (req, res) {
 
                 let brochureSite = (requirements.brochure) ? 'brochure' : 'non-brochure';
                 let ecommerce = (requirements.ecommerce) ? 'requires e-commerce' : 'does not require e-commerce';
-                let features = featureList || '';
-                let cms = evaluate;
+                let features = featureList || 'no features';
 
-                return 'foo';
-                //return `You want a ${brochure} ${requirements.stack}-based CMS, with ${features} and ${ecommerce} functionality. \nI would definitely recommend ${evaluate}!`
+                return `You want a ${brochure} ${requirements.stack}-based CMS, with ${features} and ${ecommerce} functionality. \nI would definitely recommend ${evaluate}!`
               }();
-
-              console.log(advancedSite);
-              console.log(featureList);
-              console.log(evaluate);
-              console.log(speech);
 
               return res.json({
                 speech: speech,
