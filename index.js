@@ -129,7 +129,7 @@ app.post('/webhook', function (req, res) {
               return res.json({
                 speech: speech,
                 source: 'drinkabout-evaluation-cms',
-                displayText: speech
+                displayText: speech,
                 resetContexts: true
               });             
             }
