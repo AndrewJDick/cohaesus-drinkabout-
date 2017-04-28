@@ -67,7 +67,7 @@ app.post('/webhook', function (req, res) {
                 let features = '';
 
                 for (let feature in requirements.features) {
-                  features += (requirements.features[feature] !== requirements.features[requirements.features.length-1]) ?  `${requirements.features[feature]}, ` : `and ${requirements.features[feature]}.`;
+                  features += (requirements.features[feature] !== requirements.features[requirements.features.length-1]) ?  `${requirements.features[feature]}, ` : `and ${requirements.features[feature]},`;
                 }
 
                 return features;
@@ -116,8 +116,6 @@ app.post('/webhook', function (req, res) {
                 return 'foo';
                 //return `You want a ${brochure} ${requirements.stack}-based CMS, with ${features} and ${ecommerce} functionality. \nI would definitely recommend ${evaluate}!`
               }
-
-              
 
               return res.json({
                 speech: speech,
