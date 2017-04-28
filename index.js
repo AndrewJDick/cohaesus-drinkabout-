@@ -28,14 +28,6 @@ app.post('/webhook', function (req, res) {
 
           if (requestBody.result) {
 
-            if (requestBody.result.action === 'default.reset') {
-              return res.json({
-                speech: '/giphy reset',
-                source: 'drinkabout-evaluation-cms',
-                displayText: '/giphy reset'
-              });
-            }
-
             if (requestBody.result.action === 'tech.cms.evaluate') {
 
               const contexts = requestBody.result.contexts; 
@@ -125,10 +117,18 @@ app.post('/webhook', function (req, res) {
                 let ecommerce = (requirements.ecommerce) ? 'requires e-commerce' : 'does not require e-commerce';
                 let features = featureList || 'no features';
 
-                if (evaluate !== 'unknown') {
-                  return `You want a ${requirements.stack}-based ${brochure} CMS, with ${features} and ${ecommerce} functionality.\nI would definitely recommend ${evaluate}!\n Type 'reset' to start again.`
+                if (brochure) {
+                  if (evaluate !== 'unknown') {
+                    return `You want a ${requirements.stack}-based ${brochure} CMS.\nI would definitely recommend ${evaluate}!\n Type 'reset' to start again.`
+                  } else {
+                    return `You want a ${brochure} CMS.\nI can't match a suitable CMS with your chosen tech stack (${requirements.stack}).\nHopefully my knowledge base will grow as the app continues to learn!\n Type 'reset' to start again.`
+                  }
                 } else {
-                  return `You want a ${brochure} CMS, with ${features} and ${ecommerce} functionality.\nI cannot think of a suitable CMS with the ${requirements.stack} tech stack you specified.\nHopefully I will learn more stacks as the app continues to learn!\n Type 'reset' to start again.`
+                  if (evaluate !== 'unknown') {
+                    return `You want a ${requirements.stack}-based ${brochure} CMS, with ${features} and ${ecommerce} functionality.\nI would definitely recommend ${evaluate}!\n Type 'reset' to start again.`
+                  } else {
+                    return `You want a ${brochure} CMS, with ${features} and ${ecommerce} functionality.\nI can't match a suitable CMS with your chosen tech stack (${requirements.stack}).\nHopefully my knowledge base will grow as the app continues to learn!\n Type 'reset' to start again.`
+                  }
                 }
               }();
 
