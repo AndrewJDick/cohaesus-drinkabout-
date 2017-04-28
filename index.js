@@ -118,9 +118,9 @@ app.post('/webhook', function (req, res) {
                 let features = featureList || 'no features';
 
                 if (evaluate !== 'unknown') {
-                  return `You want a ${requirements.stack}-based ${brochure} CMS, with ${features} and ${ecommerce} functionality.\nI would definitely recommend ${evaluate}!`
+                  return `You want a ${requirements.stack}-based ${brochure} CMS, with ${features} and ${ecommerce} functionality.\nI would definitely recommend ${evaluate}!\n Type 'reset' to start again.`
                 } else {
-                  return `You want a ${brochure} CMS, with ${features} and ${ecommerce} functionality.\nI cannot think of a suitable CMS with the ${requirements.stack} tech stack you specified.\nHopefully I will learn more stacks as the app continues to learn!`
+                  return `You want a ${brochure} CMS, with ${features} and ${ecommerce} functionality.\nI cannot think of a suitable CMS with the ${requirements.stack} tech stack you specified.\nHopefully I will learn more stacks as the app continues to learn!\n Type 'reset' to start again.`
                 }
               }();
 
