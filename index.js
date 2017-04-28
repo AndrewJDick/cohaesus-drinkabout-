@@ -75,7 +75,7 @@ app.post('/webhook', function (req, res) {
                     ? `${requirements.features[feature]}, ` 
                     : (requirements.features.length > 1) 
                       ? `and ${requirements.features[feature]},` 
-                      : `${requirements.features[feature]},`;
+                      : `a ${requirements.features[feature]},`;
                 }
 
                 return features;
@@ -93,21 +93,21 @@ app.post('/webhook', function (req, res) {
                 } 
 
                 else {
-                  if (!requirements.brochure || requirements.brochure && !advancedSite) {
+                  if (requirements.brochure || (!requirements.brochure && !advancedSite)) {
                     switch(requirements.stack) {
                       case 'php': return 'Wordpress';
                       case '.net' : return 'Umbraco';
                     }
                   }
 
-                  if (requirements.brochure && advancedSite) {
+                  if (!requirements.brochure && advancedSite) {
                     switch(requirements.stack) {
                       case 'php': return 'Drupal';
                       case '.net' : return 'Sitecore';
                     }
                   }
 
-                  return 'fail';
+                  return 'unknown';
                 }
               }();
 
@@ -117,10 +117,14 @@ app.post('/webhook', function (req, res) {
                 let ecommerce = (requirements.ecommerce) ? 'requires e-commerce' : 'does not require e-commerce';
                 let features = featureList || 'no features';
 
-                if (evaluate !== 'fail') {
-                  return `You want a ${brochure} ${requirements.stack}-based CMS, with ${features} and ${ecommerce} functionality. \nI would definitely recommend ${evaluate}!`
+                if (evaluate !== 'unknown') {
+                  return  `You want a ${brochure} ${requirements.stack}-based CMS, with ${features} and ${ecommerce} functionality.\n
+                          I would definitely recommend ${evaluate}!`
                 } else {
-                  return `I have failed you, Senpai. Type reset to start over *commits seppuku*`
+                  return  `You want a ${brochure} CMS, with ${features} and ${ecommerce} functionality.\n
+                          I cannot think of a suitable CMS with the ${requirements.stack} tech stack.\n
+                          Hopefully I will learn more stacks as the app continues to learn!\n
+                          Type 'reset' or 'hello' to start again`
                 }
               }();
 
