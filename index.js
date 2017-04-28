@@ -73,7 +73,7 @@ app.post('/webhook', function (req, res) {
 
               // cms object created as a basis of evaluation.
               const requirements = {
-                stack: cmsContext.parameters['tech-stack'] !== 'no preference' ? cmsContext.parameters['tech-stack'] : 'php';
+                stack: cmsContext.parameters['tech-stack'] !== 'no preference' ? cmsContext.parameters['tech-stack'] : 'php',
                 brochure: cmsContext.parameters.brochure === 'yes' ? true : false,
                 ecommerce: cmsContext.parameters.ecommerce === 'yes' ? true : false,
                 features: cmsContext.parameters['tech-features'] || []
