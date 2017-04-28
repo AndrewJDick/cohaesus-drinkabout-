@@ -124,13 +124,12 @@ app.post('/webhook', function (req, res) {
                 }
               }();
 
-              console.log(speech);
+              requestBody.resetContexts = true;
 
               return res.json({
                 speech: speech,
                 source: 'drinkabout-evaluation-cms',
-                displayText: speech,
-                resetContexts: true
+                displayText: speech
               });             
             }
           }
