@@ -109,7 +109,6 @@ app.post('/webhook', function (req, res) {
                 }
               }();
 
-
               const speech = function() {
 
                 let brochure = (requirements.brochure) ? 'brochure' : 'non-brochure';
@@ -122,6 +121,8 @@ app.post('/webhook', function (req, res) {
                   return `I have failed you, Senpai. Type reset to start over *commits seppuku*`
                 }
               }();
+
+              console.log(speech);
 
               return res.json({
                 speech: speech,
