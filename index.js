@@ -39,11 +39,11 @@ app.post('/webhook', function (req, res) {
                 }
               }
 
-              let techStack = cmsContext.parameters.stack;
+              let techStack = cmsContext.parameters['tech-stack'];
               let speech = '';
 
               if (techStack === 'no preference') {
-                cmsContext.parameters.stack = 'php';
+                cmsContext.parameters['tech-stack'] = 'php';
                 speech = `No preference? No worries!\n Are you looking for a simple brochure website?`; 
               } else {
                 speech = `${techStack}? A fine choice!\n Are you looking for a simple brochure website?`;
