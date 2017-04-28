@@ -34,6 +34,8 @@ app.post('/webhook', function (req, res) {
 
               let cmsContext = {};
               let speech = '';
+              let features = '';
+              let advancedSite = false;
               
               // Locate and store the current CMS context, containing all of the user's parameters 
               for (let context of contexts) {
@@ -50,10 +52,29 @@ app.post('/webhook', function (req, res) {
                 features: cmsContext.parameters['tech-features'] || []
               };
 
+              // TODO: Pull the entity values from the API.AI agent entity, rather than hard-coding.
+              const advancedFeatures = ['multi-site', 'multi-lingual', 'personalisation', 'dynamic forms', 'interactive elements', 'user accounts', 'dynamic forms', 'interactive elements'];
+
+              // If the features array contains any advanced features, switch requirements.level to advanced.
+              for (let feature in requirements.features) {
+                for (let advancedFeature in advancedFeatures) {
+                  if (requirements.feature[feature] === advancedFeatures[advancedFeature]) {
+                    advancedSite = true;
+                  }
+                }
+              }
+
+              // Output all features to a single string value
+              for (let feature in requirements.features) {
+                features += (requirements.features[feature] !== requirements.features[requirements.features.length-1]) ?  `${requirements.features[feature]}, ` : `and ${requirements.features[feature]}.`;
+              }
+
+
+              // Evaluate the parameters and return the correct CMS based on the user requirements.
               const evaluate = function() {
 
                 if (requirements.ecommerce === true) {
-                  if (requirements.features.length > 0) {
+                  if (advancedSite === true) {
                     return 'Magento';
                   } else {
                     return 'Shopify';
@@ -62,7 +83,6 @@ app.post('/webhook', function (req, res) {
 
                 else {
                   if (requirements.stack === 'php' && requirements.brochure === true) {
-                    chosenCMS = 'Wordpress';
                     return 'Wordpress';
                   }
 
@@ -70,11 +90,11 @@ app.post('/webhook', function (req, res) {
                     return 'Umbraco';
                   }
 
-                  if (requirements.stack === 'php' && requirements.brochure === false && requirements.features.length > 0) {
+                  if (requirements.stack === 'php' && requirements.brochure === false && advancedSite === true) {
                     return 'Drupal';
                   }
  
-                  if (requirements.stack === '.net' && requirements.brochure === false && requirements.features.length > 0) {
+                  if (requirements.stack === '.net' && requirements.brochure === false && advancedSite === true) {
                     return 'Sitecore';
                   }
 
@@ -84,15 +104,8 @@ app.post('/webhook', function (req, res) {
                 }
               }();
 
-              let features = '';
-
-              // Final Outcome
-              for (let feature in requirements.features) {
-                features += (requirements.features[feature] !== requirements.features[requirements.features.length-1]) ?  `${requirements.features[feature]}, ` : `and ${requirements.features[feature]}.`;
-              }
-
               console.log(requirements.features);
-              console.log(features); 
+              console.log(advancedSite);
 
               //speech = `You want a ${requirements.stack}-based CMS, `
 
