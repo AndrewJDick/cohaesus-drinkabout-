@@ -141,11 +141,11 @@ app.post('/webhook', function (req, res) {
 
               const speech = function() {
 
-                console.log(brochure);
-
                 let brochure = (requirements.brochure) ? 'brochure' : 'non-brochure';
                 let ecommerce = (requirements.ecommerce) ? 'requires e-commerce' : 'does not require e-commerce';
                 let features = featureList || 'no features';
+
+                console.log(brochure);
 
                 if (brochure) {
                   if (evaluate !== 'unknown') {
