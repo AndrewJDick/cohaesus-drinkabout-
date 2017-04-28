@@ -42,7 +42,7 @@ app.post('/webhook', function (req, res) {
               let techStack = cmsContext.parameters.stack;
               let speech = '';
 
-              if (techstack === 'no preference') {
+              if (techStack === 'no preference') {
                 cmsContext.parameters.stack = 'php';
                 speech = `No preference? No worries!\n Are you looking for a simple brochure website?`; 
               } else {
