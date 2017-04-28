@@ -124,7 +124,8 @@ app.post('/webhook', function (req, res) {
                 }
               }();
 
-              requestBody.resetContexts = true;
+              // Manually reset contexts
+              req.body.contexts = [];
 
               return res.json({
                 speech: speech,
